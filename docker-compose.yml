@@ -30,7 +30,7 @@ services:
     expose:
       - 80
     ports:
-      - 80:80
+      - 8080:8080
     environment:
       WORDPRESS_DB_HOST: mariadb
       WORDPRESS_DB_NAME: heticdb
@@ -38,4 +38,13 @@ services:
       WORDPRESS_DB_PASSWORD: hetic
     volumes:
       - ./wordpress:/var/www/html
+
+    web:
+      build: .
+      command: python app.py
+      ports:
+        -"80:80"
+      restart: always
+      volumes:
+        - ./static/:/app/static/
 
